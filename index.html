@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Editing: The "S" Rules | JeParleEnglish</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --blue-deep: #0f172a;
+            --blue-royal: #1e3a8a;
+            --gold-main: #fbbf24;
+            --gold-light: #fcd34d;
+            --gold-dark: #b45309;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc; }
+        .brand-blue-bg { background-color: var(--blue-royal); }
+        .brand-deep-bg { background-color: var(--blue-deep); }
+        .brand-gold-bg { background-color: var(--gold-main); }
+        .brand-blue-text { color: var(--blue-royal); }
+        .brand-deep-text { color: var(--blue-deep); }
+        .brand-gold-text { color: var(--gold-main); }
+        .brand-gold-dark-text { color: var(--gold-dark); }
+        .brand-gold-border { border-color: var(--gold-main); }
+        .brand-blue-border { border-color: var(--blue-royal); }
+        .lesson-shadow { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        const App = () => {
+            const [activeTab, setActiveTab] = useState('concept');
+
+            const renderTabContent = () => {
+                switch(activeTab) {
+                    case 'concept': return <ConceptSection />;
+                    case 'practice': return <PracticeSection />;
+                    case 'speak': return <SpeakSection />;
+                    default: return <ConceptSection />;
+                }
+            };
+
+            return (
+                <div className="min-h-screen flex flex-col custom-scrollbar">
+                    <header className="brand-deep-bg text-white p-6 shadow-md">
+                        <div className="max-w-4xl mx-auto flex justify-between items-center">
+                            <div>
+                                <h1 className="text-3xl font-bold text-white mb-1">Advanced Editing: The "S" Rules</h1>
+                                <p className="text-gray-300 text-sm font-medium">Subject-Verb Agreement, Adjectives & Uncountables</p>
+                            </div>
+                            <div className="hidden md:flex space-x-2">
+                                <span className="px-3 py-1 rounded-full text-xs font-bold brand-gold-bg text-slate-900">Grammar</span>
+                                <span className="px-3 py-1 rounded-full text-xs font-bold brand-gold-bg text-slate-900">Proofreading</span>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div className="max-w-4xl mx-auto w-full mt-6 px-4">
+                        <div className="flex rounded-lg overflow-hidden lesson-shadow bg-white">
+                            <button onClick={() => setActiveTab('concept')} className={`flex-1 py-4 font-semibold text-center transition-colors ${activeTab === 'concept' ? 'brand-blue-bg text-white' : 'text-gray-600 hover:bg-gray-50'}`}>1. Masterclass</button>
+                            <button onClick={() => setActiveTab('practice')} className={`flex-1 py-4 font-semibold text-center transition-colors border-l border-gray-200 ${activeTab === 'practice' ? 'brand-blue-bg text-white' : 'text-gray-600 hover:bg-gray-50'}`}>2. The Editor's Desk</button>
+                            <button onClick={() => setActiveTab('speak')} className={`flex-1 py-4 font-semibold text-center transition-colors border-l border-gray-200 ${activeTab === 'speak' ? 'brand-blue-bg text-white' : 'text-gray-600 hover:bg-gray-50'}`}>3. Write & Debate</button>
+                        </div>
+                    </div>
+
+                    <main className="flex-grow max-w-4xl mx-auto w-full p-4 mt-4 mb-8">
+                        <div className="bg-white rounded-xl p-6 md:p-8 lesson-shadow fade-in">
+                            {renderTabContent()}
+                        </div>
+                    </main>
+
+                    <footer className="brand-deep-bg py-6 mt-auto">
+                        <div className="max-w-4xl mx-auto px-4 text-center">
+                            <p className="text-gray-400 text-sm">JeParleEnglish © 2026 | Made for learners with ❤️ | elessons14@gmail.com</p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const ConceptSection = () => {
+            return (
+                <div className="space-y-10 fade-in">
+                    <div>
+                        <div className="bg-blue-50 border-l-4 brand-blue-border p-4 mb-6">
+                            <p className="text-slate-800 text-lg font-bold">The Fluency Trap</p>
+                            <p className="text-slate-700">When you write fast, your brain translates French grammar rules into English. This causes a very specific problem: <strong>Too many 'S's!</strong> We need to clean up the code.</p>
+                        </div>
+
+                        <h2 className="text-2xl font-bold text-red-600 border-b-2 border-red-200 pb-2 inline-block mb-4">Rule 1: Naked Adjectives</h2>
+                        <p className="text-gray-800 mb-4 text-lg">In French, adjectives take an 's' to match plural nouns (<em>multiples groupes</em>). In English, <strong>adjectives NEVER take an 'S'. Ever.</strong></p>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="bg-red-50 p-5 rounded-lg border border-red-200 text-center">
+                                <div className="text-xl font-bold text-red-900 line-through mb-2">multiples groups ❌</div>
+                                <div className="text-xl font-bold text-red-900 line-through">certains sites ❌</div>
+                            </div>
+                            <div className="bg-green-50 p-5 rounded-lg border border-green-400 text-center shadow-sm">
+                                <div className="text-xl font-bold text-green-900 mb-2">multiple groups ✅</div>
+                                <div className="text-xl font-bold text-green-900">certain sites ✅</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2 className="text-2xl font-bold brand-blue-text border-b-2 brand-gold-border pb-2 inline-block mb-4">Rule 2: The "One S" Rule (Subject-Verb Agreement)</h2>
+                        <p className="text-gray-800 mb-4 text-lg">Think of a <strong>3rd Person Subject</strong> (He, She, It, or a Noun) and the Verb as a seesaw. They must balance. Usually, <strong>only one of them gets an 'S'.</strong></p>
+                        
+                        <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 shadow-sm">
+                            <div className="flex flex-col md:flex-row gap-4">
+                                <div className="flex-1 bg-white p-4 border border-blue-300 rounded shadow-sm text-center">
+                                    <div className="font-bold text-blue-700 mb-1 text-xl">Singular Subject (Noun/He/She/It)</div>
+                                    <p className="text-md text-slate-700 mb-2">No 'S' on the subject = <strong>Put an 'S' on the verb.</strong></p>
+                                    <div className="bg-blue-50 p-2 rounded font-mono font-bold">The fan scream<span className="text-red-500">s</span>.</div>
+                                    <div className="bg-blue-50 p-2 rounded font-mono font-bold mt-1">This make<span className="text-red-500">s</span> me happy.</div>
+                                </div>
+                                <div className="flex-1 bg-white p-4 border border-amber-300 rounded shadow-sm text-center">
+                                    <div className="font-bold text-amber-700 mb-1 text-xl">Plural Subject (Nouns/They/We)</div>
+                                    <p className="text-md text-slate-700 mb-2">'S' on the subject = <strong>NO 'S' on the verb.</strong></p>
+                                    <div className="bg-amber-50 p-2 rounded font-mono font-bold">The fan<span className="text-red-500">s</span> scream.</div>
+                                    <div className="bg-amber-50 p-2 rounded font-mono font-bold mt-1">Parents give cellphones.</div>
+                                </div>
+                            </div>
+                            <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded text-center">
+                                <div className="text-red-700 font-bold mb-1">🚨 The "I & You" Exception</div>
+                                <p className="text-slate-700 text-sm">"I" and "You" are singular, but they <strong>NEVER</strong> take an 'S' on the verb. <br/><em>"I play", NOT "I plays".</em></p>
+                            </div>
+                            <div className="text-center mt-4 text-slate-600 font-bold">
+                                ❌ Warning: "Parents gives" has TWO 's's. It is too heavy!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2 className="text-2xl font-bold brand-gold-dark-text border-b-2 brand-gold-border pb-2 inline-block mb-4">Rule 3: Irregular & Uncountable Traps</h2>
+                        <p className="text-gray-800 mb-4 text-lg">These words trick your brain. Memorize them.</p>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                            <div className="bg-white p-4 border border-slate-300 rounded shadow-sm">
+                                <div className="text-red-500 line-through">peoples</div>
+                                <div className="font-bold text-slate-800 text-xl text-green-600">people</div>
+                                <div className="text-xs text-slate-500 mt-1">(Already plural!)</div>
+                            </div>
+                            <div className="bg-white p-4 border border-slate-300 rounded shadow-sm">
+                                <div className="text-red-500 line-through">childrens</div>
+                                <div className="font-bold text-slate-800 text-xl text-green-600">children</div>
+                                <div className="text-xs text-slate-500 mt-1">(Already plural!)</div>
+                            </div>
+                            <div className="bg-white p-4 border border-slate-300 rounded shadow-sm">
+                                <div className="text-red-500 line-through">stuffs</div>
+                                <div className="font-bold text-slate-800 text-xl text-green-600">stuff</div>
+                                <div className="text-xs text-slate-500 mt-1">(Uncountable mass)</div>
+                            </div>
+                            <div className="bg-white p-4 border border-slate-300 rounded shadow-sm">
+                                <div className="text-red-500 line-through">musics</div>
+                                <div className="font-bold text-slate-800 text-xl text-green-600">music</div>
+                                <div className="text-xs text-slate-500 mt-1">(Uncountable concept)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const PracticeSection = () => {
+            // Ex 1: Naked Adjectives & Uncountables
+            const ex1Data = [
+                { q: "K-pop companies have created ___ groups.", options: ["multiples", "multiple", "a multiple"], correct: "multiple" },
+                { q: "You should put restrictions on ___ websites.", options: ["certain", "certains", "a certain"], correct: "certain" },
+                { q: "They produce ___ to make us happy.", options: ["musics", "music", "a music"], correct: "music" },
+                { q: "The internet has 18+ ___ that kids shouldn't see.", options: ["stuffs", "stuff", "a stuff"], correct: "stuff" },
+                { q: "I bought some ___ to wear to the concert.", options: ["blacks shoes", "black shoes", "black shoe"], correct: "black shoes" },
+                { q: "We need to talk to ___ about this issue.", options: ["different peoples", "differents people", "different people"], correct: "different people" },
+                { q: "The cat has white ___ on its tail.", options: ["furs", "fur", "a fur"], correct: "fur" },
+                { q: "___ under 10 should not have cellphones.", options: ["Children", "Childrens", "A children"], correct: "Children" },
+                { q: "They have a huge fanbase with ___ fans.", options: ["loyals", "loyal", "a loyal"], correct: "loyal" },
+                { q: "There are ___ problems with stalkers.", options: ["severals", "several", "a several"], correct: "several" }
+            ];
+            const [ex1Idx, setEx1Idx] = useState(0);
+            const [ex1Ans, setEx1Ans] = useState("");
+            const [ex1Status, setEx1Status] = useState("idle");
+
+            const checkEx1 = () => { ex1Ans === ex1Data[ex1Idx].correct ? setEx1Status('correct') : setEx1Status('wrong'); };
+            const nextEx1 = () => { if(ex1Idx < ex1Data.length -1) { setEx1Idx(ex1Idx+1); setEx1Ans(""); setEx1Status("idle"); } };
+
+            // Ex 2: The SVA Seesaw (10 Questions)
+            const ex2Data = [
+                { q: "Parents nowadays ___ their kids an iPad.", options: ["gives", "give", "giving"], correct: "give" },
+                { q: "This situation ___ me admire them more.", options: ["make", "makes", "making"], correct: "makes" },
+                { q: "Some fans ___ obsessed with an idol.", options: ["becomes", "become", "becoming"], correct: "become" },
+                { q: "She also ___ long orange hair.", options: ["have", "has", "having"], correct: "has" },
+                { q: "The straps that ___ over his shoulders are brown.", options: ["goes", "go", "going"], correct: "go" },
+                { q: "Each group ___ a certain charm to the industry.", options: ["adds", "add", "adding"], correct: "adds" },
+                { q: "People who ___ groups for no reason are annoying.", options: ["hates", "hate", "hating"], correct: "hate" },
+                { q: "A child who ___ a phone might get addicted.", options: ["owns", "own", "owning"], correct: "owns" },
+                { q: "They try to please fans, but this ___ their boundaries.", options: ["crosses", "cross", "crossing"], correct: "crosses" },
+                { q: "The internet ___ full of people posting crimes.", options: ["are", "is", "be"], correct: "is" }
+            ];
+            const [ex2Idx, setEx2Idx] = useState(0);
+            const [ex2Ans, setEx2Ans] = useState("");
+            const [ex2Status, setEx2Status] = useState("idle");
+
+            const checkEx2 = () => { ex2Ans === ex2Data[ex2Idx].correct ? setEx2Status('correct') : setEx2Status('wrong'); };
+            const nextEx2 = () => { if(ex2Idx < ex2Data.length -1) { setEx2Idx(ex2Idx+1); setEx2Ans(""); setEx2Status("idle"); } };
+
+            // Ex 3: The Editor's Desk (Find the Grammatically Perfect Sentence)
+            const ex3Data = [
+                { 
+                    q: "Choose the perfectly edited sentence:", 
+                    options: [
+                        "I also admire them for going their own path and not listening to peoples that critiques them for their musics.",
+                        "I also admire them for going their own path and not listening to people who critique them for their music.",
+                        "I also admire them for going their own path and not listening to people who critiques them for their music."
+                    ], 
+                    correct: 1 // index of correct option
+                },
+                { 
+                    q: "Choose the perfectly edited sentence:", 
+                    options: [
+                        "For years, K-pop has created multiple groups and multiple companies.",
+                        "For years, K-pop has created multiples groups and multiples compagnies.",
+                        "For years, K-pop has created multiple groups and multiples companies."
+                    ], 
+                    correct: 0 
+                },
+                { 
+                    q: "Choose the perfectly edited sentence:", 
+                    options: [
+                        "In this essay, I will explain why cellphones shouldn’t be given to a childrens who is under 10.",
+                        "In this essay, I will explain why cellphones shouldn’t be given to children who is under 10.",
+                        "In this essay, I will explain why cellphones shouldn’t be given to children who are under 10."
+                    ], 
+                    correct: 2 
+                },
+                { 
+                    q: "Choose the perfectly edited sentence:", 
+                    options: [
+                        "This problems is everywhere even outside of Korea.",
+                        "These problems are everywhere, even outside of Korea.",
+                        "These problems is everywhere, even outside of Korea."
+                    ], 
+                    correct: 1 
+                },
+                { 
+                    q: "Choose the perfectly edited sentence:", 
+                    options: [
+                        "Bill is wearing a white shirt with grey pants and brown straps that goes on his shoulders.",
+                        "Bill is wearing a white shirt with grey pants and brown straps that go on his shoulders.",
+                        "Bill is wearing a white shirt with greys pants and brown straps that go on his shoulders."
+                    ], 
+                    correct: 1 
+                },
+                {
+                    q: "Choose the perfectly edited sentence:",
+                    options: [
+                        "Some fans become obsessed with a group or an idol.",
+                        "Some fans becomes obsess with a groups or an idols.",
+                        "Some fans become obsessed with a groups or an idols."
+                    ],
+                    correct: 0
+                },
+                {
+                    q: "Choose the perfectly edited sentence:",
+                    options: [
+                        "They can also help people who feel lonely.",
+                        "They can also help peoples that fell lonely.",
+                        "They can also help people who feels lonely."
+                    ],
+                    correct: 0
+                },
+                {
+                    q: "Choose the perfectly edited sentence:",
+                    options: [
+                        "At that age, I was playing with my friends every single days.",
+                        "At that age, I was playing with my friends every single day.",
+                        "At that age, I was playing with my friend every single days."
+                    ],
+                    correct: 1
+                },
+                {
+                    q: "Choose the perfectly edited sentence:",
+                    options: [
+                        "There are also two white birds on the tree.",
+                        "There are also two whites birds on the tree.",
+                        "There is also two white birds on the tree."
+                    ],
+                    correct: 0
+                },
+                {
+                    q: "Choose the perfectly edited sentence:",
+                    options: [
+                        "Parents now gives their children an iPad.",
+                        "Parents now give their childrens an iPad.",
+                        "Parents now give their children an iPad."
+                    ],
+                    correct: 2
+                }
+            ];
+            const [ex3Idx, setEx3Idx] = useState(0);
+            const [ex3Ans, setEx3Ans] = useState(null);
+            const [ex3Status, setEx3Status] = useState('idle');
+
+            const checkEx3 = () => { ex3Ans === ex3Data[ex3Idx].correct ? setEx3Status('correct') : setEx3Status('wrong'); };
+            const nextEx3 = () => { if(ex3Idx < ex3Data.length-1) { setEx3Idx(ex3Idx+1); setEx3Ans(null); setEx3Status('idle'); } };
+
+            return (
+                <div className="fade-in space-y-12">
+                    {/* EX 1 */}
+                    <div>
+                        <div className="bg-blue-50 border-l-4 brand-blue-border p-4 rounded-r-lg mb-4 flex justify-between items-center">
+                            <h3 className="font-bold brand-blue-text text-lg">Exercise 1: Adjectives & Uncountables</h3>
+                            <div className="font-bold text-slate-500 bg-white px-3 py-1 rounded shadow-sm">{ex1Idx + 1} / {ex1Data.length}</div>
+                        </div>
+                        <div className={`flex items-center gap-3 flex-wrap bg-white p-6 border rounded-lg mb-4 text-lg ${ex1Status === 'wrong' ? 'border-red-400 bg-red-50' : 'border-gray-200'}`}>
+                            <span className="font-semibold text-slate-800">{ex1Data[ex1Idx].q.split('___')[0]}</span>
+                            <select className={`border-b-2 bg-transparent p-2 font-bold focus:outline-none ${ex1Status === 'correct' ? 'border-green-500 text-green-700' : 'border-blue-500'}`} value={ex1Ans} onChange={(e) => {setEx1Ans(e.target.value); setEx1Status('idle');}} disabled={ex1Status === 'correct'}>
+                                <option value="">...</option>
+                                {ex1Data[ex1Idx].options.map((opt, i) => <option key={i} value={opt}>{opt}</option>)}
+                            </select>
+                            <span className="font-semibold text-slate-800">{ex1Data[ex1Idx].q.split('___')[1]}</span>
+                        </div>
+                        <div className="flex items-center gap-4">
+                            <button onClick={checkEx1} disabled={!ex1Ans} className="px-6 py-2 brand-blue-bg text-white rounded font-bold hover:bg-blue-800 transition shadow disabled:opacity-50">Check Answer</button>
+                            {ex1Status === 'correct' && <div className="flex items-center gap-4"><span className="text-green-600 font-bold">Correct!</span>{ex1Idx < ex1Data.length - 1 && <button onClick={nextEx1} className="px-4 py-1 bg-green-600 text-white rounded font-bold hover:bg-green-700">Next &rarr;</button>}</div>}
+                            {ex1Status === 'wrong' && <span className="text-red-500 font-bold">Remember: Adjectives NEVER take an 's'. Some nouns don't either!</span>}
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    {/* EX 2 */}
+                    <div>
+                        <div className="bg-amber-50 border-l-4 brand-gold-border p-4 rounded-r-lg mb-4 flex justify-between items-center">
+                            <h3 className="font-bold brand-gold-dark-text text-lg">Exercise 2: The SVA Seesaw</h3>
+                            <div className="font-bold text-slate-500 bg-white px-3 py-1 rounded shadow-sm">{ex2Idx + 1} / {ex2Data.length}</div>
+                        </div>
+                        <div className={`flex items-center gap-3 flex-wrap bg-white p-6 border rounded-lg mb-4 text-lg ${ex2Status === 'wrong' ? 'border-red-400 bg-red-50' : 'border-gray-200'}`}>
+                            <span>{ex2Data[ex2Idx].q.split('___')[0]}</span>
+                            <select className={`border-b-2 bg-transparent p-2 font-bold focus:outline-none ${ex2Status === 'correct' ? 'border-green-500 text-green-700' : 'border-blue-500'}`} value={ex2Ans} onChange={(e) => {setEx2Ans(e.target.value); setEx2Status('idle');}} disabled={ex2Status === 'correct'}>
+                                <option value="">...</option>
+                                {ex2Data[ex2Idx].options.map((opt, i) => <option key={i} value={opt}>{opt}</option>)}
+                            </select>
+                            <span>{ex2Data[ex2Idx].q.split('___')[1]}</span>
+                        </div>
+                        <div className="flex items-center gap-4">
+                            <button onClick={checkEx2} disabled={!ex2Ans} className="px-6 py-2 brand-blue-bg text-white rounded font-bold hover:bg-blue-800 transition shadow disabled:opacity-50">Check Answer</button>
+                            {ex2Status === 'correct' && <div className="flex items-center gap-4"><span className="text-green-600 font-bold">Correct!</span>{ex2Idx < ex2Data.length - 1 && <button onClick={nextEx2} className="px-4 py-1 bg-green-600 text-white rounded font-bold hover:bg-green-700">Next &rarr;</button>}</div>}
+                            {ex2Status === 'wrong' && <span className="text-red-500 font-bold">Check the Subject! If it has an 's', the verb doesn't.</span>}
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    {/* EX 3 */}
+                    <div>
+                        <div className="bg-slate-100 border-l-4 border-slate-500 p-4 rounded-r-lg mb-4 flex justify-between items-center">
+                            <h3 className="font-bold text-slate-800 text-lg">Exercise 3: The Editor's Desk</h3>
+                            <div className="font-bold text-slate-500 bg-white px-3 py-1 rounded shadow-sm">{ex3Idx + 1} / {ex3Data.length}</div>
+                        </div>
+                        <p className="text-slate-600 mb-4 italic">These sentences came from a real essay. Two of them have French grammar traps. One is perfect English. Choose the perfect one.</p>
+                        
+                        <div className="space-y-3 mb-6">
+                            {ex3Data[ex3Idx].options.map((option, idx) => (
+                                <button 
+                                    key={idx}
+                                    onClick={() => { if(ex3Status !== 'correct') { setEx3Ans(idx); setEx3Status('idle'); } }}
+                                    className={`w-full text-left p-4 rounded-lg border-2 transition ${ex3Ans === idx ? (ex3Status === 'correct' ? 'bg-green-100 border-green-500 text-green-900 font-bold' : (ex3Status === 'wrong' ? 'bg-red-100 border-red-500 text-red-900' : 'bg-blue-50 border-blue-500 brand-blue-text font-bold')) : 'border-gray-200 hover:border-blue-300'}`}
+                                    disabled={ex3Status === 'correct'}
+                                >
+                                    {option}
+                                </button>
+                            ))}
+                        </div>
+                        
+                        <div className="flex items-center gap-4">
+                            <button onClick={checkEx3} disabled={ex3Ans === null} className="px-6 py-2 brand-blue-bg text-white rounded font-bold hover:bg-blue-800 transition shadow disabled:opacity-50">Check Answer</button>
+                            {ex3Status === 'correct' && <div className="flex items-center gap-4"><span className="text-green-600 font-bold">Excellent editing!</span>{ex3Idx < ex3Data.length - 1 && <button onClick={nextEx3} className="px-4 py-1 bg-green-600 text-white rounded font-bold hover:bg-green-700">Next Question &rarr;</button>}</div>}
+                            {ex3Status === 'wrong' && <span className="text-red-500 font-bold">Look closely at the plurals and the verbs!</span>}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const SpeakSection = () => {
+            return (
+                <div className="fade-in space-y-8">
+                    <div className="bg-amber-50 border-l-4 brand-gold-border p-6 rounded-lg lesson-shadow">
+                        <h3 className="font-bold brand-gold-dark-text text-xl mb-2">The Debate: Cellphones & Kids</h3>
+                        <p className="text-slate-700 text-lg mb-4">
+                            You wrote an essay about kids and cellphones. Now, we are going to debate it out loud. 
+                        </p>
+                        <div className="bg-white p-4 rounded border border-amber-200 space-y-2">
+                            <span className="font-bold text-slate-800">Your Talking Points:</span>
+                            <ul className="text-slate-700 italic list-disc pl-5">
+                                <li>"Parents <strong>give</strong> cellphones to kids too early."</li>
+                                <li>"<strong>Children</strong> under 10 should play outside."</li>
+                                <li>"These <strong>problems are</strong> everywhere."</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div className="bg-blue-50 border-l-4 brand-blue-border p-6 rounded-lg lesson-shadow">
+                        <h3 className="font-bold brand-blue-text text-xl mb-2">Challenge: Live SVA</h3>
+                        <p className="text-slate-700 text-lg">
+                            The teacher will ask you a question. You must answer using a <strong>plural subject</strong> (Parents, Fans, Kids). Remember: <strong className="text-red-600">NO 'S' ON THE VERB!</strong>
+                        </p>
+                        <div className="mt-4 bg-white p-3 rounded border border-blue-200 text-slate-700">
+                            <strong>Teacher:</strong> "What do fans do at a concert?"<br/>
+                            <strong>You:</strong> "The fans <strong>scream</strong> and <strong>dance</strong>."
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
